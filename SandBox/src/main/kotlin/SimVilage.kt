@@ -1,3 +1,5 @@
+import kotlin.reflect.KFunction0
+
 /*fun main() {
     val greetingFunction: (String, Int)/*Тип параметра*/ -> String/*Тип выходного значения*/ = { playerName/*Сам параметр*/, numBuildings ->
 //    val greetingFunction: (String) -> String = {/*Не указываем параметр, используем it*/
@@ -18,6 +20,10 @@ fun main() {
         "Welcome to SimVillage, $playerName! (c) $currentYear"
     }
 
+    someFunction(::printSomeFunction, "yes, it's works!")
+
+
+
 }
 
 inline fun runSimulation(playerName: String,
@@ -32,3 +38,12 @@ fun printConstructionCost(numBuildings: Int) {
     val cost = 500
     println("construction cost: ${cost * numBuildings}")
 }
+
+fun someFunction(printSome: (String) -> Unit, someText: String) {
+    printSome(someText)
+}
+
+fun printSomeFunction(someText: String) {
+    println(someText)
+}
+

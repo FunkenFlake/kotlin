@@ -1,0 +1,120 @@
+Заметки по Kotlin
+
+Можно делать так (тип Int)
+var forExample = "Gladiator".lenght // 9
+
+В переменную можно засунуть условие (тип Boolean)
+var forExample = 10 > 1 && 10 < 13 || 5 > 3
+
+Затем использовать это в услувии
+if (forExample) {
+	//что-то делается
+}
+
+Можно присвоить условное выражение переменной
+val a = 1
+var forExample = if (a > 0) {
+	"Больше нуля"
+} else {
+	"Меньше или равно нулю"
+}
+
+println(forExample) //Больше нуля
+
+Если возвращается одно условие, можно писать без {}
+forExample = if (a > 0) "Больше нуля"
+			else "Меньше"
+
+Упростим условие выше
+forExample = if (a > 0) "Больше нуля" else "Меньше"
+
+Условное выражение when
+val race = "gnome"
+val faction = when (race) {
+	"dwarf" -> "Keepers of the Mines"
+	"gnome" -> "Keepers of the Mines"
+	"orc" -> "Free People of the Rolling Hills"
+	"human" -> "Free People of the Rolling Hills"
+	}
+
+Шаблонные строки
+name + " " + "blah blah"
+исправим на 
+"$name blah blah"
+
+в (${}) фигурные скобки можно вставлять выражения
+они будут вставлены в строку (их результат)
+"Условие ${if (a > 0) "Больше нуля" else "Меньше"}"
+
+Функции
+private nameSomeFunction(numbers: Int): Int {
+	// что-то делает
+	return numbers
+}
+
+Передача лямбды в качестве аргумента
+val numLetters = "Mississippi".count({ letter ->
+	letter == 's'
+})
+print(numLetters) // 4
+
+Простенькая лямбда
+println({
+	val currentYear = 2018
+	"Welcome to SimVillage, Mayor! (copyright $currentYear)"
+}())
+
+Объявление функционального типа
+someFunction: () -> String = {
+	//что-то делает
+}
+
+() -> String - () это и есть функциональный тип
+то что идет после -> String это возвращаемый тип.
+Объявление такого типа у переменной someFunction
+показывает, что данная переменная может 
+присвоить любую функцию не принимающую аргументов,
+т.е. (пустые скобки).
+
+Аргументы
+Сначала объявляем типы параметров, а сами
+параметны объявляем в функции.
+val someFunction:(String) -> String = {playerName ->
+	// playerName cам параметр
+	//что-то делает
+}
+
+Ключевое слово it
+Если лямбда принимает 1 аргумент, вместо него
+можно использовать it. Укажем только тип пар-ра.
+val someFunctin:(String) -> String = {
+	"вывожу параметр: $it"
+}
+Хорошо подойдет для не больших функций
+"Mississippi".count({ it == 's' })
+
+Вот функция
+fun configureGreetingFunction(): (String) -> String {
+    val structureType = "hospitals"
+    var numBuildings = 5
+    return {playerName: String ->
+        val currentYear = 2022
+        numBuildings += 1
+        println("Adding $numBuildings $structureType")
+        "Welcome to SimVillage, $playerName! (c) $currentYear"
+    }
+}
+
+Строка (): (String) -> String {
+	
+}
+я так понял означает функциональный тип лямбды.
+по идее должно быть написано someFunction: (String) -> String
+но тк лямбда это анонимная функция, то имени нету.
+и получается просто (): (String) -> String
+
+
+readline() - функция для ввода
+var beverage = readLine()
+println(beverage)
+

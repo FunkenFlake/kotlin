@@ -14,36 +14,23 @@ import kotlin.reflect.KFunction0
  */
 
 fun main() {
-    runSimulation("Guyal", ::printConstructionCost) {playerName, numBuildings ->
+    runSimulation()
+}
+
+fun runSimulation() {
+    val greetingFunction = configureGreetingFunction()
+    println(greetingFunction("Gyual"))
+    println(greetingFunction("Gyual"))
+    println(greetingFunction("Gyual"))
+}
+
+fun configureGreetingFunction(): (String) -> String {
+    val structureType = "hospitals"
+    var numBuildings = 5
+    return {playerName: String ->
         val currentYear = 2022
-        println("Adding $numBuildings houses")
+        numBuildings += 1
+        println("Adding $numBuildings $structureType")
         "Welcome to SimVillage, $playerName! (c) $currentYear"
     }
-
-    someFunction(::printSomeFunction, "yes, it's works!")
-
-
-
 }
-
-inline fun runSimulation(playerName: String,
-                         costPrinter: (Int) -> Unit,
-                         greetingFunction: (String, Int) -> String) {
-    val numBuildings = (1..3).shuffled().last()//Случайное число от 1..3
-    costPrinter(numBuildings)
-    println(greetingFunction(playerName, numBuildings))
-}
-
-fun printConstructionCost(numBuildings: Int) {
-    val cost = 500
-    println("construction cost: ${cost * numBuildings}")
-}
-
-fun someFunction(printSome: (String) -> Unit, someText: String) {
-    printSome(someText)
-}
-
-fun printSomeFunction(someText: String) {
-    println(someText)
-}
-

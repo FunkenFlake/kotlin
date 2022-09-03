@@ -1,49 +1,22 @@
+const val TAVERN_NAME = "Taernyl's Folly"
 fun main() {
-    var beverage = readLine()?.let {
-        if (it.isNotBlank()) {
-            it.replaceFirstChar { it.uppercase() }
-        } else {
-            "Buttered Ale"
-        }
-    }
+    placeOrder("shandy,Dragon's Breath,5.91")
+}
 
-    println(beverage)
-    secondOperator()
-    thirdOperator()
-    letPlusElvis()
-}
-// Второй вариант проверки на null приказной.
-private fun secondOperator() {
-    var beverage = readLine()!!.replaceFirstChar { it.uppercase() }
-    println(beverage)
-}
-// Тут обычная проверка через if (kotlin тоже это понимает, поэтому
-// мы не ставим операторы !!. и ?
-private fun thirdOperator() {
-    var beverage = readLine()
-    if (beverage != null) {
-        beverage.replaceFirstChar { it.uppercase() }
-    } else {
-        println("I can't do that without crashing - beverage is null!")
-    }
-//    println(beverage)
-//    Оператор элвис (если beverage != null оно будет = beverageServed
-//    если = null, тогда будет = "Buttered Ale"
-    val beverageServed: String = beverage ?: "Buttered Ale"
-    println(beverageServed)
-}
-// как по мне самый лучший вариант использовать let + ?:
-private fun letPlusElvis() {
-    var beverage = readLine()
-    beverage?.let {
-        beverage = it.replaceFirstChar { it.uppercase() }
-    } ?: println("I can't use it, beverage is null")
+private fun placeOrder(menuData: String) {
+    val indexOfApostrophe = TAVERN_NAME.indexOf('\'') // получаем индекс первого апострофа
+    val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe) // возвращает новую строку
+    println("Madrigal speaks with $tavernMaster about their order.")
 
-//    текст выше можно сократить до:
-/**    var beverage = readLine()?.let {
-        it.replaceFirstChar { it.uppercase() }
-    } ?: println("I can't do it, beverage is null")
-    println(beverage)
+/** Вместо этого используем синтаксис деструктуризации
+    val data = menuData.split(',') // принимает символ разделитель и возвращает список подстрок
+    val type = data[0]
+    val name = data[1]
+    val price = data[2]
 */
-}
 
+    val (type, name, price) = menuData.split(',') // деструктуризация
+
+    val message = "Madrigal buys a $name ($type) for $price."
+    println(message)
+}

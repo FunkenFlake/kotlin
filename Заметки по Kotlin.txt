@@ -168,3 +168,7 @@ patronList.getOrNull(4) ?: "Unkown patron"
 
 Изменяемый список
 mutableListOf
+
+Изменение типа списка
+toList
+toMutableList

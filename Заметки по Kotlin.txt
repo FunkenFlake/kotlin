@@ -149,3 +149,22 @@ n
 ${"%.2f".format(someVarForRounding)}
 
 .roundToInt() округляет до ближайшего целого числа
+
+Представление целого числа в виде двоичного
+Integer.toBinaryString(42)
+101010
+
+Создание списка
+val patronList = listOf("Eli", "Mordoc", "Sophie")
+patronList[0]
+patronList.first() // Eli
+patronList.last() // Sophie
+
+Безопасный вызов по индексу
+patronList.getOrElse(4) { "Unknown Patron" }
+
+Или
+patronList.getOrNull(4) ?: "Unkown patron"
+
+Изменяемый список
+mutableListOf

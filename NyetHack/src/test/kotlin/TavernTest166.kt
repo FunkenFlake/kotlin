@@ -8,9 +8,6 @@ var barrel = 5.0
 
 fun main() {
     placeOrder("shandy,Dragon's Breath,5.91")
-    placeOrder("shandy,Dragon's Breath,5.91")
-    placeOrder("shandy,Dragon's Breath,5.91")
-    placeOrder("shandy,Dragon's Breath,5.91")
 }
 
 // Функция совершения покупки

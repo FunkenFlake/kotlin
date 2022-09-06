@@ -8,12 +8,15 @@ var playerSilver = 10
 val patronList = mutableListOf("Eli", "Mordoc", "Sophie")
 val lastName = listOf("Ironfoot", "Fernsworth", "Baggins")
 val uniquePatrons = mutableSetOf<String>() // прописываем тип, тк задаем пустое множество
-val menuList = File("data/tavern-menu-data.txt")
-                    .readText() // возвращает содержимое файла в виде строки
-                    .split("\n") // разбиваем содержимое файла по символу перевода строки
+val menuList = File("data/tavern-menu-data-for-hm.txt")
+    .readText() // возвращает содержимое файла в виде строки
+    .split("\n") // разбиваем содержимое файла по символу перевода строки
 val readOnlyPatronList = patronList.toList()
 
 fun main() {
+
+    welcomeToTavern(menuList)
+
     if (patronList.contains("Eli")) {
         println("The tavern master says: Eli's in the back playing cards.")
     } else {
@@ -28,24 +31,24 @@ fun main() {
 
 //    placeOrder("shandy,Dragon's Breath,5.91")
 
-/** Циклы: for, forEach, forEachIndexed
+    /** Циклы: for, forEach, forEachIndexed
     for (patron in patronList) {
-        println("Good evening, $patron")
+    println("Good evening, $patron")
     }
 
     patronList.forEach { patron ->
-        println("Good evening, $patron")
+    println("Good evening, $patron")
     }
 
     patronList.forEachIndexed { index, patron ->
-        println("Good evening, $patron - you're #${index + 1} in line.")
-        placeOrder(patron, menuList.shuffled().first())
+    println("Good evening, $patron - you're #${index + 1} in line.")
+    placeOrder(patron, menuList.shuffled().first())
     }
 
     menuList.forEachIndexed { index, data ->
-        println("$index : $data")
+    println("$index : $data")
     }
- */
+     */
 
     (0..9).forEach {
         val first = patronList.shuffled().first()
@@ -59,8 +62,18 @@ fun main() {
     var orderCount = 0
     while (orderCount <= 9) {
         placeOrder(uniquePatrons.shuffled().first(),
-                    menuList.shuffled().first())
+            menuList.shuffled().first())
         orderCount++
+    }
+
+}
+
+private fun welcomeToTavern(menuData: List<String>) {
+    println("*** Welcome to $TAVERN_NAME ***\n")
+
+    menuData.forEach {
+        val (_, name, price) = it.split(',')
+        println("${name.replaceFirstChar { it.uppercase() }.padEnd(35, '.')}$price")
     }
 
 }
@@ -104,7 +117,7 @@ private fun placeOrder(patronName: String, menuData: String) {
     val type = data[0]
     val name = data[1]
     val price = data[2]
-    */
+     */
 
     val (type, name, price) = menuData.split(',') // деструктуризация
     val message = "$patronName buys a $name ($type) for $price."

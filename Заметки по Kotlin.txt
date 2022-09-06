@@ -172,3 +172,46 @@ mutableListOf
 Изменение типа списка
 toList
 toMutableList
+
+Цикл for
+for (patron in patronList) {
+	println("Hello $patron")
+}
+
+Чтение файла
+val menuList = File("data/tavern-menu-items.txt")
+					.readText()
+					.split("\n")
+
+Множества, тоже что и listOf \ mutableListOf только
+setOf \ mutableSetOf
+
+val planets = setOf("Mercury", "Venus", "Earth")
+planets.elementAt(2) //вывод по индексу, но не как у listOf
+Earth
+
+Множества не поддерживают мутаторы для доступа по индексу
+
+
+Цикл while
+
+var orderCount = 0
+while (orderCount <= 9) {
+	placeOrder(uniquePatrons.shuffled().first(),
+				menuList.shuffled().first())
+	orderCount++
+}
+
+Прервать можно оператором break, просто вписать его куда-нибудь
+
+Преобразовать список во множество, чтобы отбросить дубликаты
+можно с помощью функции distinct()
+val patrons = listOf("Eli Baggins", "Eli Baggins", "Eli Ironfoot").distinct()
+[Eli Baggins, Eli Ironfoot]
+
+Про списки
+var myList: List<Int> = listOf(1,2,3)
+(myList as MutableList)[2] = 1000
+myList
+[1, 2, 1000]
+

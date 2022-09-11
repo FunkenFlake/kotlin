@@ -69,13 +69,20 @@ fun main() {
 }
 
 private fun welcomeToTavern(menuData: List<String>) {
-    println("*** Welcome to $TAVERN_NAME ***\n")
-
-    menuData.forEach {
-        val (_, name, price) = it.split(',')
-        println("${name.replaceFirstChar { it.uppercase() }.padEnd(35, '.')}$price")
+    println("* Welcome to $TAVERN_NAME *\n")
+    val typeOfMenu = mutableListOf<String>()
+    menuData.forEach { separeitIt ->
+        val (type, _, _) = separeitIt.split(',')
+        if (!typeOfMenu.contains(type)) {
+            typeOfMenu += type
+            println("\t\t\t~[${typeOfMenu.last()}]~")
+            menuData.forEach { separeitItAgain ->
+                val (type2, name, price) = separeitItAgain.split(',')
+                val positionOfMenu = "${name.replaceFirstChar { it.uppercase() }.padEnd(33, '.')}$price"
+                if (type == type2) println(positionOfMenu)
+            }
+        }
     }
-
 }
 
 // Функция совершения покупки

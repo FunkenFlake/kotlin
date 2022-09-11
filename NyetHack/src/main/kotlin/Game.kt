@@ -1,8 +1,12 @@
 fun main() {
-    val name = "Madrigal"
     var healthPoints = 89
     val isBlessed = true
     val isImmortal = false
+
+    val player = Player()
+
+//    Заклинание
+    player.castFireBall()
 
 //    Aura
     val auraColor = auraColor(isBlessed, healthPoints, isImmortal)
@@ -53,11 +57,7 @@ println(name + " is in awful condition!")
     val healthStatus = formatHealthStatus(healthPoints, isBlessed, minorWoundsBut)
 
 //    Состояние игрока
-    printPlayerStatus(auraColor, isBlessed, name, healthStatus)
-
-//    Заклинание
-    castFireBall()
-
+    printPlayerStatus(auraColor, isBlessed, player.name, healthStatus)
 }
 
 private fun printPlayerStatus(
@@ -92,10 +92,6 @@ private fun formatHealthStatus(
         in 15..74 -> "looks pretty hurt"
         else -> "is in awful condition!"
     }
-
-private fun castFireBall(numFireBalls: Int = 2) {
-    println("A glass of Fireball springs into existence. (x$numFireBalls)")
-}
 
 /*  Самопальная драка
 //    Fight!

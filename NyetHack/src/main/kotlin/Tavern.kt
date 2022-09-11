@@ -2,15 +2,13 @@ import java.io.File
 import kotlin.math.roundToInt
 const val TAVERN_NAME = "Taernyl's Folly"
 
-var playerGold = 10
-var playerSilver = 10
-
 val patronList = mutableListOf("Eli", "Mordoc", "Sophie")
 val lastName = listOf("Ironfoot", "Fernsworth", "Baggins")
 val uniquePatrons = mutableSetOf<String>() // прописываем тип, тк задаем пустое множество
 val menuList = File("data/tavern-menu-data.txt")
                     .readText() // возвращает содержимое файла в виде строки
                     .split("\n") // разбиваем содержимое файла по символу перевода строки
+val patronGold = mutableMapOf<String, Double>()
 val readOnlyPatronList = patronList.toList()
 
 fun main() {
@@ -53,8 +51,10 @@ fun main() {
         val name = "$first $last"
         uniquePatrons += name
     }
-
-    println(uniquePatrons)
+//    Перебераем уникальных посетителей и кладем им по 6 золотых на счет
+    uniquePatrons.forEach {
+        patronGold[it] = 6.0
+    }
 
     var orderCount = 0
     while (orderCount <= 9) {
@@ -63,34 +63,27 @@ fun main() {
         orderCount++
     }
 
+    displayPatronBalances()
 }
 
 // Функция совершения покупки
-fun performPurchase(price: Double) {
-    displayBalance() // показываем начальный баланс
+fun performPurchase(price: Double, patronName: String) {
+    val totalPurse = patronGold.getValue(patronName)
+    patronGold[patronName] = totalPurse - price
+    if (patronGold.getValue(patronName) <= 0) {
+        uniquePatrons.remove(patronName)
+        patronGold.remove(patronName)
+    }
+    println(patronGold)
+    println(uniquePatrons)
 
-    // преобразуем золото и серебро в одну валюту
-    val totalPurse = playerGold + (playerSilver / 100.0)
-    println("Total purse: $totalPurse")
-    println("Purchasing item for $price")
-
-    // показываем баланс после совершения покупки, округлив до 2х знаков после точки
-    val remainingBalance = totalPurse - price
-    println("Remaning balance: ${"%.2f".format(remainingBalance)}")
-
-    // разбираем обратно нашу единую валюту (типо 4.19) на золото(4) и серебро(19)
-    val remainingGold = remainingBalance.toInt() // откидываем дробную часть
-    val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
-    playerGold = remainingGold
-    playerSilver = remainingSilver
-
-    // показываем баланс после покупки
-    displayBalance()
 }
 
-// Функция для просмотра баланса
-private fun displayBalance() {
-    println("Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
+// Функция вывода баланса после покупки
+private fun displayPatronBalances() {
+    patronGold.forEach{ patron, balance ->
+        println("$patron, balance: ${"%.2f".format(balance)}")
+    }
 }
 
 // Функция заказа напитка из меню
@@ -110,7 +103,7 @@ private fun placeOrder(patronName: String, menuData: String) {
     val message = "$patronName buys a $name ($type) for $price."
     println(message)
 
-//    performPurchase(price.toDouble()) // Оплачиваем заказ, аргумент преобразуем в числовой тип
+    performPurchase(price.toDouble(), patronName) // Оплачиваем заказ, аргумент преобразуем в числовой тип
 
     val phrase = if (name == "Dragon's Breath") {
         "$patronName exclaims ${toDragonSpeak("Ah, delicious $name")}"

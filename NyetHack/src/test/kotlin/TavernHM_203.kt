@@ -15,67 +15,23 @@ val readOnlyPatronList = patronList.toList()
 
 fun main() {
 
-    welcomeToTavern(menuList)
-
-    if (patronList.contains("Eli")) {
-        println("The tavern master says: Eli's in the back playing cards.")
-    } else {
-        println("The tavern master says: Eli isn't here.")
-    }
-
-    if (patronList.containsAll(listOf("Mordoc", "Sophie"))) {
-        println("The tavern master says: Yea, they're seated by the stew kettle.")
-    } else {
-        println("The tavern master says: Nay, they departed hours ago.")
-    }
-
-//    placeOrder("shandy,Dragon's Breath,5.91")
-
-    /** Циклы: for, forEach, forEachIndexed
-    for (patron in patronList) {
-    println("Good evening, $patron")
-    }
-
-    patronList.forEach { patron ->
-    println("Good evening, $patron")
-    }
-
-    patronList.forEachIndexed { index, patron ->
-    println("Good evening, $patron - you're #${index + 1} in line.")
-    placeOrder(patron, menuList.shuffled().first())
-    }
-
-    menuList.forEachIndexed { index, data ->
-    println("$index : $data")
-    }
-     */
-
-    (0..9).forEach {
-        val first = patronList.shuffled().first()
-        val last = lastName.shuffled().first()
-        val name = "$first $last"
-        uniquePatrons += name
-    }
-
-    println(uniquePatrons)
-
-    var orderCount = 0
-    while (orderCount <= 9) {
-        placeOrder(uniquePatrons.shuffled().first(),
-            menuList.shuffled().first())
-        orderCount++
-    }
+    welcomeToTavern(menuList.toMutableList())
 
 }
 
-private fun welcomeToTavern(menuData: List<String>) {
+private fun welcomeToTavern(menuData: MutableList<String>) {
     println("* Welcome to $TAVERN_NAME *\n")
-    val typeOfMenu = mutableListOf<String>()
+
+    val typeOfMenu = mutableSetOf<String>()
+
     menuData.forEach { separeitIt ->
         val (type, _, _) = separeitIt.split(',')
+
         if (!typeOfMenu.contains(type)) {
             typeOfMenu += type
+
             println("\t\t\t~[${typeOfMenu.last()}]~")
+
             menuData.forEach { separeitItAgain ->
                 val (type2, name, price) = separeitItAgain.split(',')
                 val positionOfMenu = "${name.replaceFirstChar { it.uppercase() }.padEnd(33, '.')}$price"
@@ -110,7 +66,7 @@ fun performPurchase(price: Double) {
 
 // Функция для просмотра баланса
 private fun displayBalance() {
-    println("Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
+    println("com.bignerdranch.nyathack.Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
 }
 
 // Функция заказа напитка из меню
@@ -118,7 +74,6 @@ private fun placeOrder(patronName: String, menuData: String) {
     val indexOfApostrophe = TAVERN_NAME.indexOf('\'') // получаем индекс первого апострофа
     val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe) // возвращает новую строку
     println("$patronName speaks with $tavernMaster about their order.")
-
     /** Вместо этого используем синтаксис деструктуризации
     val data = menuData.split(',') // принимает символ разделитель и возвращает список подстрок
     val type = data[0]
@@ -130,7 +85,7 @@ private fun placeOrder(patronName: String, menuData: String) {
     val message = "$patronName buys a $name ($type) for $price."
     println(message)
 
-//    performPurchase(price.toDouble()) // Оплачиваем заказ, аргумент преобразуем в числовой тип
+    //    com.bignerdranch.nyathack.performPurchase(price.toDouble()) // Оплачиваем заказ, аргумент преобразуем в числовой тип
 
     val phrase = if (name == "Dragon's Breath") {
         "$patronName exclaims ${toDragonSpeak("Ah, delicious $name")}"

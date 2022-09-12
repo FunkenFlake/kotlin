@@ -1,83 +1,78 @@
 //import kotlin.math.roundToInt
-//const val TAVERN_NAME = "Taernyl's Folly"
+//const val TAVERT_NAME = "Taernyl's Folly"
 //const val PINTA = 0.125
 //
+//var playerDragCoin = 5
 //var playerGold = 10
 //var playerSilver = 10
 //var barrel = 5.0
 //
-//fun main() {
+//fun com.bignerdranch.nyathack.main() {
 //    placeOrder("shandy,Dragon's Breath,5.91")
+//
 //}
 //
-//// Функция совершения покупки
-//fun performPurchase(price: Double) {
-//    displayBalance() // показываем начальный баланс
-//    displayRemainderBarrel(barrel) // показываем начальный остаток в бочке
+////Функция покупки
+//fun com.bignerdranch.nyathack.performPurchase(price: Double) {
+//    displayBalance()
+//    displayRemainderBarrel(barrel)
 //
-//    // преобразуем золото и серебро в одну валюту
-//    val totalPurse = playerGold + (playerSilver / 100.0)
-//    println("Total purse: $totalPurse")
+////    val totalPurse = playerGold + (playerSilver / 100.0)
+//    val totalPurse = playerDragCoin * 1.43
+//    println("Total purse: ${"%.4f".format(totalPurse)}")
 //    println("Purchasing item for $price")
 //
-//    // показываем баланс после совершения покупки, округлив до 2х знаков после точки
-//    val remainingBalance = totalPurse - price
-//    println("Remaning balance: ${"%.2f".format(remainingBalance)}")
-//    val remainingBalanceBarrel = barrel - PINTA
-//    println("Remainder dirnk in barrel: $remainingBalanceBarrel")
+//    if (totalPurse >= price) {
+//        val remainingBalance = (totalPurse - price) / 1.43
+//        println("Remaining balance: ${"%.4f".format(remainingBalance)}")
+//        val remainingBarrel = barrel - PINTA
+//        println("Remainder drink in barrel: $remainingBarrel")
 //
-//    // разбираем обратно нашу единую валюту (типо 4.19) на золото(4) и серебро(19)
-//    val remainingGold = remainingBalance.toInt() // откидываем дробную часть
-//    val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
-//    playerGold = remainingGold
-//    playerSilver = remainingSilver
+////        val remainingGold = remainingBalance.toInt()
+////        val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
+////        playerGold = remainingGold
+////        playerSilver = remainingSilver
+//        barrel = remainingBarrel
+//    } else {
+//        println("Madrigal is don't have enough money!")
+//    }
 //
-//    // показываем баланс после покупки
 //    displayBalance()
 //}
 //
-//// Функция для просмотра баланса
+////Функция просмотра баланса
 //private fun displayBalance() {
-//    println("Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
+//    println("com.bignerdranch.nyathack.Player's purse balance: Gold: $playerGold, Silver: $playerSilver, Drag Coin: $playerDragCoin")
 //}
 //
-//// Функция заказа напитка из меню
+////Функция заказа напитка из меню
 //private fun placeOrder(menuData: String) {
-//    val indexOfApostrophe = TAVERN_NAME.indexOf('\'') // получаем индекс первого апострофа
-//    val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe) // возвращает новую строку
-//    println("Madrigal speaks with $tavernMaster about their order.")
+//    val indexOfApostrophe = TAVERT_NAME.indexOf('\'')
+//    val tavernMaster = TAVERT_NAME.substring(0 until indexOfApostrophe)
+//    println("Madrigal speaks with $tavernMaster about their order")
 //
-//    /** Вместо этого используем синтаксис деструктуризации
-//    val data = menuData.split(',') // принимает символ разделитель и возвращает список подстрок
-//    val type = data[0]
-//    val name = data[1]
-//    val price = data[2]
-//     */
-//
-//    val (type, name, price) = menuData.split(',') // деструктуризация
-//    val message = "Madrigal buys a $name ($type) for $price."
+//    val (type, name, price) = menuData.split(',')
+//    val message = "Madrigal byus a $name ($type) for $price"
 //    println(message)
 //
-//    performPurchase(price.toDouble()) // Оплачиваем заказ, аргумент преобразуем в числовой тип
+//    com.bignerdranch.nyathack.performPurchase(price.toDouble())
+////    com.bignerdranch.nyathack.performPurchase(price.toDouble())
+//
 //
 //    val phrase = if (name == "Dragon's Breath") {
 //        "Madrigal exclaims ${toDragonSpeak("Ah, delicious $name")}"
 //    } else {
-//        "Madrigal says: Thanks for the $name."
+//        "Madrigal says: Thanks for the $name"
 //    }
 //    println(phrase)
 //}
 //
+////Показываем остаток в бочке
 //private fun displayRemainderBarrel(barrel: Double) {
 //    println("Remainder drink in barrel - $barrel")
 //}
 //
-///** Описание phrase.replace(Regex...
-// * replace принимает два аргумента. Регулярное выражение или regex, задает шаблон
-// * для поиска нужных символов. Второй аргумент это анонимная функция, которая
-// * определяет, какие символы необходимо заменить. *
-// */
-//// Функция перевода на др4к0ний я3b|к
+////Функция перевода на драконий язык
 //private fun toDragonSpeak(phrase: String) =
 //    phrase.replace(Regex("[aeiouAEIOU]")) {
 //        when (it.value) {
@@ -89,3 +84,36 @@
 //            else -> it.value
 //        }
 //    }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//

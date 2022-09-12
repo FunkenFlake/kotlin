@@ -1,13 +1,15 @@
+package com.bignerdranch.nyathack
+
 import java.io.File
-import kotlin.math.roundToInt
+
 const val TAVERN_NAME = "Taernyl's Folly"
 
 val patronList = mutableListOf("Eli", "Mordoc", "Sophie")
 val lastName = listOf("Ironfoot", "Fernsworth", "Baggins")
 val uniquePatrons = mutableSetOf<String>() // прописываем тип, тк задаем пустое множество
 val menuList = File("data/tavern-menu-data.txt")
-                    .readText() // возвращает содержимое файла в виде строки
-                    .split("\n") // разбиваем содержимое файла по символу перевода строки
+    .readText() // возвращает содержимое файла в виде строки
+    .split("\n") // разбиваем содержимое файла по символу перевода строки
 val patronGold = mutableMapOf<String, Double>()
 val readOnlyPatronList = patronList.toList()
 
@@ -24,26 +26,26 @@ fun main() {
         println("The tavern master says: Nay, they departed hours ago.")
     }
 
-//    placeOrder("shandy,Dragon's Breath,5.91")
+    //    com.bignerdranch.nyathack.placeOrder("shandy,Dragon's Breath,5.91")
 
-/** Циклы: for, forEach, forEachIndexed
-    for (patron in patronList) {
-        println("Good evening, $patron")
+    /** Циклы: for, forEach, forEachIndexed
+    for (patron in com.bignerdranch.nyathack.getPatronList) {
+    println("Good evening, $patron")
     }
 
-    patronList.forEach { patron ->
-        println("Good evening, $patron")
+    com.bignerdranch.nyathack.getPatronList.forEach { patron ->
+    println("Good evening, $patron")
     }
 
-    patronList.forEachIndexed { index, patron ->
-        println("Good evening, $patron - you're #${index + 1} in line.")
-        placeOrder(patron, menuList.shuffled().first())
+    com.bignerdranch.nyathack.getPatronList.forEachIndexed { index, patron ->
+    println("Good evening, $patron - you're #${index + 1} in line.")
+    com.bignerdranch.nyathack.placeOrder(patron, com.bignerdranch.nyathack.getMenuList.shuffled().first())
     }
 
-    menuList.forEachIndexed { index, data ->
-        println("$index : $data")
+    com.bignerdranch.nyathack.getMenuList.forEachIndexed { index, data ->
+    println("$index : $data")
     }
- */
+     */
 
     (0..9).forEach {
         val first = patronList.shuffled().first()
@@ -51,15 +53,16 @@ fun main() {
         val name = "$first $last"
         uniquePatrons += name
     }
-//    Перебераем уникальных посетителей и кладем им по 6 золотых на счет
+    //    Перебераем уникальных посетителей и кладем им по 6 золотых на счет
     uniquePatrons.forEach {
         patronGold[it] = 6.0
     }
 
     var orderCount = 0
     while (orderCount <= 9) {
-        placeOrder(uniquePatrons.shuffled().first(),
-                    menuList.shuffled().first())
+        placeOrder(
+            uniquePatrons.shuffled().first(),
+            menuList.shuffled().first())
         orderCount++
     }
 
@@ -97,7 +100,7 @@ private fun placeOrder(patronName: String, menuData: String) {
     val type = data[0]
     val name = data[1]
     val price = data[2]
-    */
+     */
 
     val (type, name, price) = menuData.split(',') // деструктуризация
     val message = "$patronName buys a $name ($type) for $price."
